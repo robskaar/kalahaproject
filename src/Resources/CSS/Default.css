@@ -1,0 +1,18 @@
+
+
+.BackgroundPane{
+    -fx-background-color: transparent;
+    -fx-background-image: url('../Pictures/Table.jpg');
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 950,950;
+    -fx-background-position: center;
+
+}
+
+.GameBoard{
+    -fx-background-color: transparent;
+    -fx-background-image: url('../Pictures/Board.png');
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 800;
+    -fx-background-position: center;
+}
