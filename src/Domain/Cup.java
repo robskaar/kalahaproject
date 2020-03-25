@@ -16,6 +16,7 @@ import java.util.ResourceBundle;
 public class Cup {
     private int amountOfStones;
     private int ID;
+    private static Cup currentCup;
     private static Cup nextCup;
     private static Cup temp;
     private static Cup head = null;
@@ -49,13 +50,17 @@ public class Cup {
 
     }
 
-    public void traverseList() {
-        Cup currentCup = head;
+    public static Cup traverseList(int ID) {
+         currentCup = head;
 
         if (head != null) {
             do {
                 currentCup = nextCup;
-            } while (currentCup != head);
+            } while (currentCup.ID != ID);
+            return currentCup;
+        }
+        else{
+            return null;
         }
     }
 
@@ -85,7 +90,7 @@ public class Cup {
         addNode(4,13);
         addNode(0,14);
 
-       // moveStones(cup2_3);
+        moveStones(traverseList(1));
 
     }
 
