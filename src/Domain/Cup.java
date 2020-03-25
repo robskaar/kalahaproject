@@ -15,14 +15,15 @@ import java.util.ResourceBundle;
 
 public class Cup {
     private int amountOfStones;
+    private int ID;
     private static Cup nextCup;
     private static Cup temp;
     private static Cup head = null;
     private static Cup tail = null;
 
 
-    public static void addNode(int amountOfStones) {
-        Cup cup = new Cup(amountOfStones);
+    public static void addNode(int amountOfStones,int ID) {
+        Cup cup = new Cup(amountOfStones, ID);
 
         if (head == null) {
             head = cup;
@@ -35,8 +36,9 @@ public class Cup {
     }
 
 
-    public Cup(int amountOfStones) {
+    public Cup(int amountOfStones, int ID) {
         this.amountOfStones = amountOfStones;
+        this.ID = ID;
     }
 
     // Function to insert at the end
@@ -68,20 +70,20 @@ public class Cup {
 
     public static void main(String[] args) {
 
-        addNode(4);
-        addNode(4);
-        addNode(4);
-        addNode(4);
-        addNode(4);
-        addNode(4);
-        addNode(0);
-        addNode(4);
-        addNode(4);
-        addNode(4);
-        addNode(4);
-        addNode(4);
-        addNode(4);
-        addNode(0);
+        addNode(4,1);
+        addNode(4,2);
+        addNode(4,3);
+        addNode(4,4);
+        addNode(4,5);
+        addNode(4,6);
+        addNode(0,7);
+        addNode(4,8);
+        addNode(4,9);
+        addNode(4,10);
+        addNode(4,11);
+        addNode(4,12);
+        addNode(4,13);
+        addNode(0,14);
 
        // moveStones(cup2_3);
 
