@@ -2,9 +2,9 @@
 
 .BackgroundPane{
     -fx-background-color: transparent;
-    -fx-background-image: url('../Pictures/Table.jpg');
+    -fx-background-image: url('../Pictures/Table.png');
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 950,950;
+    -fx-background-size: auto;
     -fx-background-position: center;
 
 }
@@ -13,6 +13,6 @@
     -fx-background-color: transparent;
     -fx-background-image: url('../Pictures/Board.png');
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 800;
+    -fx-background-size: auto;
     -fx-background-position: center;
 }
