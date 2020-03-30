@@ -2,17 +2,16 @@
 
 .BackgroundPane{
     -fx-background-color: transparent;
-    -fx-background-image: url('../Pictures/Table.png');
+    -fx-background-image: url('../Pictures/Table.jpeg');
     -fx-background-repeat: no-repeat;
-    -fx-background-size: auto;
+    -fx-background-size: cover;
     -fx-background-position: center;
 
 }
 
 .GameBoard{
     -fx-background-color: transparent;
-    -fx-background-image: url('../Pictures/Board.png');
+    -fx-background-image: url('../Pictures/coffeebeanspread.png');
     -fx-background-repeat: no-repeat;
-    -fx-background-size: auto;
-    -fx-background-position: center;
+    -fx-background-size: 200;
 }
