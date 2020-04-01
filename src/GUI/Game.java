@@ -62,6 +62,7 @@ public class Game implements Initializable {
     Image mancalaImage_1 = new Image("Resources/Pictures/unavngivet1.png");
     Image mancalaImage_2 = new Image("Resources/Pictures/unavngivet1.png");
 
+    private int noStones = 0;
     private int mancala1Id = 7;
     private int mancala2Id = 14;
     private int mancalaStartStones = 0;
@@ -78,6 +79,22 @@ public class Game implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        Cup cup1 = new Cup(4,4);
+        Cup cup2 = new Cup(4,4);
+        Cup cup3 = new Cup(4,4);
+        Cup cup4 = new Cup(4,4);
+        Cup cup5 = new Cup(4,4);
+        Cup cup6 = new Cup(4,4);
+        Cup mancala_1 = new Cup(0,4);
+        Cup cup8 = new Cup(4,4);
+        Cup cup9 = new Cup(4,4);
+        Cup cup10 = new Cup(4,4);
+        Cup cup11 = new Cup(4,4);
+        Cup cup12 = new Cup(4,4);
+        Cup cup13 = new Cup(4,4);
+        Cup mancala_2 = new Cup(0,4);
+
+
         imageViewArrayList.add(cup1_1);
         imageViewArrayList.add(cup1_2);
         imageViewArrayList.add(cup1_3);
@@ -129,7 +146,7 @@ public class Game implements Initializable {
                 imageViewArrayList.get(i - 1).addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
                     IDclicked = id;
                     statusMessage.setText(null);
-                        moveStones();
+                    moveStones();
                 });
             }
         }
@@ -193,7 +210,7 @@ public class Game implements Initializable {
      * start by getting the cup that is clicked
      * then it sets the start cup = temp cup, which is after recursion 0.
      */
-    public void moveStones(){
+    public void moveStones() {
         Cup cup = currentGame.containsCup(IDclicked);
         tempCup.amountOfStones = cup.amountOfStones;
         moveStonesRecursion(cup);
@@ -205,8 +222,8 @@ public class Game implements Initializable {
      *
      * @param cup this is the cup sent from moveStonesHelper method, the first cup we move the stones from
      */
-    private void moveStonesRecursion(Cup cup)  {
-        while (tempCup.amountOfStones.getValue() > 0) {
+    private void moveStonesRecursion(Cup cup) {
+        while (tempCup.amountOfStones.getValue() > noStones) {
             tempCup.amountOfStones.set(tempCup.amountOfStones.getValue() - 1);
             if (IDclicked > 0 && IDclicked < 7) {
                 if (cup.nextCup.ID == 14) {
@@ -214,6 +231,35 @@ public class Game implements Initializable {
                     moveStonesRecursion(cup.nextCup.nextCup);
                 }
                 else {
+                    if (cup.amountOfStones.intValue() == 1 && cup.nextCup.amountOfStones.intValue() == noStones) {
+                        cup.nextCup.amountOfStones.setValue(cup.nextCup.amountOfStones.getValue() + 1);
+                        switch (cup.ID) {
+                            case 1:
+                                containsCup(7).amountOfStones.set(cup.nextCup.amountOfStones.intValue()+containsCup(13).amountOfStones.intValue()+containsCup(7).amountOfStones.intValue());
+                                cup.nextCup.amountOfStones.set(noStones);
+                                containsCup(13).amountOfStones.set(noStones);
+                            case 2:
+                                containsCup(7).amountOfStones.set(cup.nextCup.amountOfStones.intValue()+containsCup(12).amountOfStones.intValue()+containsCup(7).amountOfStones.intValue());
+                                cup.nextCup.amountOfStones.set(noStones);
+                                containsCup(12).amountOfStones.set(noStones);
+                            case 3:
+                                containsCup(7).amountOfStones.set(cup.nextCup.amountOfStones.intValue()+containsCup(11).amountOfStones.intValue()+containsCup(7).amountOfStones.intValue());
+                                cup.nextCup.amountOfStones.set(noStones);
+                                containsCup(11).amountOfStones.set(noStones);
+                            case 4:
+                                containsCup(7).amountOfStones.set(cup.nextCup.amountOfStones.intValue()+containsCup(10).amountOfStones.intValue()+containsCup(7).amountOfStones.intValue());
+                                cup.nextCup.amountOfStones.set(noStones);
+                                containsCup(10).amountOfStones.set(noStones);
+                            case 5:
+                                containsCup(7).amountOfStones.set(cup.nextCup.amountOfStones.intValue()+containsCup(9).amountOfStones.intValue()+containsCup(7).amountOfStones.intValue());
+                                cup.nextCup.amountOfStones.set(noStones);
+                                containsCup(9).amountOfStones.set(noStones);
+                            case 6:
+                                containsCup(7).amountOfStones.set(cup.nextCup.amountOfStones.intValue()+containsCup(8).amountOfStones.intValue()+containsCup(7).amountOfStones.intValue());
+                                cup.nextCup.amountOfStones.set(noStones);
+                                containsCup(8).amountOfStones.set(noStones);
+                        }
+                    }
                     cup.nextCup.amountOfStones.setValue(cup.nextCup.amountOfStones.getValue() + 1);
                     moveStonesRecursion(cup.nextCup);
 
