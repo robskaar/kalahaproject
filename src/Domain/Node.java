@@ -13,11 +13,11 @@ import javafx.beans.property.SimpleIntegerProperty;
 public class Node {
 
      public final int ID;
-        public SimpleIntegerProperty amountOfStones;
+        public SimpleIntegerProperty numOfBeans;
         public Node nextNode;
 
-        public Node(int amountOfStones, int ID) {
-            this.amountOfStones = new SimpleIntegerProperty(amountOfStones);
+        public Node(int numOfBeans, int ID) {
+            this.numOfBeans = new SimpleIntegerProperty(numOfBeans);
             this.ID = ID;
         }
 

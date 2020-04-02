@@ -23,32 +23,32 @@
                <children>
                   <HBox alignment="CENTER" layoutX="318.0" layoutY="746.0" prefHeight="200.0" prefWidth="200.0" spacing="25.0" AnchorPane.bottomAnchor="134.0" AnchorPane.leftAnchor="275.0" AnchorPane.rightAnchor="310.0" AnchorPane.topAnchor="746.0">
                      <children>
-                        <ImageView fx:id="cup1_1" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="cup1_2" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="cup1_3" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="cup1_4" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="cup1_5" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="cup1_6" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="player1_ImageView1" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="player1_ImageView2" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="player1_ImageView3" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="player1_ImageView4" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="player1_ImageView5" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="player1_ImageView6" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" layoutX="328.0" layoutY="120.0" prefHeight="200.0" prefWidth="200.0" spacing="25.0" AnchorPane.leftAnchor="275.0" AnchorPane.rightAnchor="310.0" AnchorPane.topAnchor="134.0">
                      <children>
-                        <ImageView fx:id="cup2_6" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="cup2_5" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="cup2_4" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="cup2_3" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="cup2_2" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="cup2_1" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="player2_ImageView6" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="player2_ImageView5" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="player2_ImageView4" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="player2_ImageView3" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="player2_ImageView2" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="player2_ImageView1" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </HBox>
                   <VBox alignment="CENTER" layoutX="88.0" layoutY="311.0" prefHeight="306.0" prefWidth="324.0" AnchorPane.bottomAnchor="359.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="1486.0" AnchorPane.topAnchor="359.0">
                      <children>
-                        <ImageView fx:id="mancala2" fitHeight="362.0" fitWidth="346.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="player2_ImageView7" fitHeight="362.0" fitWidth="346.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </VBox>
                   <VBox alignment="CENTER" layoutX="1417.0" layoutY="353.0" prefHeight="306.0" prefWidth="324.0" AnchorPane.bottomAnchor="359.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="359.0">
                      <children>
-                        <ImageView fx:id="mancala1" fitHeight="362.0" fitWidth="346.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="player1_ImageView7" fitHeight="362.0" fitWidth="346.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="409.0" AnchorPane.leftAnchor="407.0" AnchorPane.rightAnchor="407.0" AnchorPane.topAnchor="471.0">
@@ -61,7 +61,7 @@
                                     <Insets />
                                  </HBox.margin>
                               </Button>
-                              <Button fx:id="rematchButton" mnemonicParsing="false" onAction="#generateNewCups" text="Rematch" />
+                              <Button fx:id="rematchButton" mnemonicParsing="false" onAction="#startMatch" text="Rematch" visible="false" />
                            </children>
                         </HBox>
                      </children>
@@ -72,32 +72,32 @@
          <bottom>
             <HBox alignment="CENTER" prefHeight="112.0" prefWidth="1300.0" spacing="37.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label fx:id="label1_1" alignment="CENTER" prefHeight="100.0" prefWidth="194.0" textFill="WHITE">
+                  <Label fx:id="player1_Label1" alignment="CENTER" prefHeight="100.0" prefWidth="194.0" textFill="WHITE">
                      <font>
                         <Font size="65.0" />
                      </font>
                   </Label>
-                  <Label fx:id="label1_2" alignment="CENTER" prefHeight="100.0" prefWidth="194.0" textFill="WHITE">
+                  <Label fx:id="player1_Label2" alignment="CENTER" prefHeight="100.0" prefWidth="194.0" textFill="WHITE">
                      <font>
                         <Font size="65.0" />
                      </font>
                   </Label>
-                  <Label fx:id="label1_3" alignment="CENTER" prefHeight="100.0" prefWidth="194.0" textFill="WHITE">
+                  <Label fx:id="player1_Label3" alignment="CENTER" prefHeight="100.0" prefWidth="194.0" textFill="WHITE">
                      <font>
                         <Font size="65.0" />
                      </font>
                   </Label>
-                  <Label fx:id="label1_4" alignment="CENTER" prefHeight="100.0" prefWidth="194.0" textFill="WHITE">
+                  <Label fx:id="player1_Label4" alignment="CENTER" prefHeight="100.0" prefWidth="194.0" textFill="WHITE">
                      <font>
                         <Font size="65.0" />
                      </font>
                   </Label>
-                  <Label fx:id="label1_5" alignment="CENTER" prefHeight="100.0" prefWidth="194.0" textFill="WHITE">
+                  <Label fx:id="player1_Label5" alignment="CENTER" prefHeight="100.0" prefWidth="194.0" textFill="WHITE">
                      <font>
                         <Font size="65.0" />
                      </font>
                   </Label>
-                  <Label fx:id="label1_6" alignment="CENTER" prefHeight="100.0" prefWidth="194.0" textFill="WHITE">
+                  <Label fx:id="player1_Label6" alignment="CENTER" prefHeight="100.0" prefWidth="194.0" textFill="WHITE">
                      <font>
                         <Font size="65.0" />
                      </font>
@@ -108,32 +108,32 @@
          <top>
             <HBox alignment="CENTER" prefHeight="112.0" prefWidth="1300.0" spacing="37.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label fx:id="label2_6" alignment="CENTER" prefHeight="100.0" prefWidth="194.0" textFill="WHITE">
+                  <Label fx:id="player2_Label6" alignment="CENTER" prefHeight="100.0" prefWidth="194.0" textFill="WHITE">
                      <font>
                         <Font size="65.0" />
                      </font>
                   </Label>
-                  <Label fx:id="label2_5" alignment="CENTER" prefHeight="100.0" prefWidth="194.0" textFill="WHITE">
+                  <Label fx:id="player2_Label5" alignment="CENTER" prefHeight="100.0" prefWidth="194.0" textFill="WHITE">
                      <font>
                         <Font size="65.0" />
                      </font>
                   </Label>
-                  <Label fx:id="label2_4" alignment="CENTER" prefHeight="100.0" prefWidth="194.0" textFill="WHITE">
+                  <Label fx:id="player2_Label4" alignment="CENTER" prefHeight="100.0" prefWidth="194.0" textFill="WHITE">
                      <font>
                         <Font size="65.0" />
                      </font>
                   </Label>
-                  <Label fx:id="label2_3" alignment="CENTER" prefHeight="100.0" prefWidth="194.0" textFill="WHITE">
+                  <Label fx:id="player2_Label3" alignment="CENTER" prefHeight="100.0" prefWidth="194.0" textFill="WHITE">
                      <font>
                         <Font size="65.0" />
                      </font>
                   </Label>
-                  <Label fx:id="label2_2" alignment="CENTER" prefHeight="100.0" prefWidth="194.0" textFill="WHITE">
+                  <Label fx:id="player2_Label2" alignment="CENTER" prefHeight="100.0" prefWidth="194.0" textFill="WHITE">
                      <font>
                         <Font size="65.0" />
                      </font>
                   </Label>
-                  <Label fx:id="label2_1" alignment="CENTER" prefHeight="100.0" prefWidth="194.0" textFill="WHITE">
+                  <Label fx:id="player2_Label1" alignment="CENTER" prefHeight="100.0" prefWidth="194.0" textFill="WHITE">
                      <font>
                         <Font size="65.0" />
                      </font>
@@ -142,31 +142,31 @@
             </HBox>
          </top>
          <left>
-            <Label fx:id="label2_7" alignment="CENTER" prefHeight="100.0" prefWidth="122.0" textFill="WHITE" BorderPane.alignment="CENTER">
+            <Label fx:id="player2_Label7" alignment="CENTER" prefHeight="100.0" prefWidth="122.0" textFill="WHITE" BorderPane.alignment="CENTER">
                <font>
                   <Font size="65.0" />
                </font>
             </Label>
          </left>
          <right>
-            <Label fx:id="label1_7" alignment="CENTER" prefHeight="100.0" prefWidth="104.0" textFill="WHITE" BorderPane.alignment="CENTER">
+            <Label fx:id="player1_Label7" alignment="CENTER" prefHeight="100.0" prefWidth="104.0" textFill="WHITE" BorderPane.alignment="CENTER">
                <font>
                   <Font size="65.0" />
                </font>
             </Label>
          </right>
       </BorderPane>
-      <BorderPane fx:id="newGamePane" prefHeight="200.0" prefWidth="200.0">
+      <BorderPane fx:id="menuPane" prefHeight="200.0" prefWidth="200.0" styleClass="menuPane" stylesheets="@../Resources/CSS/Default.css">
          <center>
             <VBox alignment="CENTER" prefHeight="345.0" prefWidth="1920.0" BorderPane.alignment="CENTER">
                <children>
-                  <TextField fx:id="userOne" alignment="CENTER" maxWidth="500.0" promptText="Enter user one's name" />
-                  <TextField fx:id="userTwo" alignment="CENTER" maxWidth="500.0" promptText="Enter user two's name">
+                  <TextField fx:id="player1_NameField" alignment="CENTER" maxWidth="500.0" promptText="Enter user one's name (starting)" />
+                  <TextField fx:id="player2_NameField" alignment="CENTER" maxWidth="500.0" promptText="Enter user two's name">
                      <VBox.margin>
                         <Insets top="20.0" />
                      </VBox.margin>
                   </TextField>
-                  <Button mnemonicParsing="false" onAction="#newGame" text="New Game">
+                  <Button mnemonicParsing="false" onAction="#startMatch" text="New Game">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>

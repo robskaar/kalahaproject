@@ -13,12 +13,13 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        javafx.scene.image.Image selecting = new Image("Resources/Pictures/selecting_hand.png");
+        javafx.scene.image.Image cursor = new Image("Resources/Pictures/Cursor.png");
+
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("Hello World");
         primaryStage.setFullScreen(true);
         primaryStage.setScene(new Scene(root, 1264, 897));
-        root.setCursor(new ImageCursor(selecting));
+        root.setCursor(new ImageCursor(cursor));
         primaryStage.show();
     }
 

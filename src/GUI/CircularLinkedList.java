@@ -8,9 +8,10 @@ package GUI;
 
 import Domain.Node;
 import Domain.Player;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -18,85 +19,101 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.util.Duration;
 
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
 
 /**
  * this class Game is actually a circular linked list, and cup's are like the nodes, this class is also assigned as the controller.
  */
-public class CircularLinkedList implements Initializable {
+public class CircularLinkedList {
 
-    @FXML private ImageView cup1_1;
-    @FXML private ImageView cup1_2;
-    @FXML private ImageView cup1_3;
-    @FXML private ImageView cup1_4;
-    @FXML private ImageView cup1_5;
-    @FXML private ImageView cup1_6;
-    @FXML private ImageView cup2_6;
-    @FXML private ImageView cup2_5;
-    @FXML private ImageView cup2_4;
-    @FXML private ImageView cup2_3;
-    @FXML private ImageView cup2_2;
-    @FXML private ImageView cup2_1;
-    @FXML private ImageView mancala2;
-    @FXML private ImageView mancala1;
-    @FXML private Label label1_1;
-    @FXML private Label label1_2;
-    @FXML private Label label1_3;
-    @FXML private Label label1_4;
-    @FXML private Label label1_5;
-    @FXML private Label label1_6;
-    @FXML private Label label1_7;
-    @FXML private Label label2_7;
-    @FXML private Label label2_6;
-    @FXML private Label label2_5;
-    @FXML private Label label2_4;
-    @FXML private Label label2_3;
-    @FXML private Label label2_2;
-    @FXML private Label label2_1;
+/*
+ Open the below to see fields - i hate scrolling 100 lines of fields :)
+ */
 
+    //region Region of Fields
+
+    //region FXML Fields
+    @FXML private ImageView player1_ImageView1;
+    @FXML private ImageView player1_ImageView2;
+    @FXML private ImageView player1_ImageView3;
+    @FXML private ImageView player1_ImageView4;
+    @FXML private ImageView player1_ImageView5;
+    @FXML private ImageView player1_ImageView6;
+    @FXML private ImageView player1_ImageView7;
+    @FXML private ImageView player2_ImageView1;
+    @FXML private ImageView player2_ImageView2;
+    @FXML private ImageView player2_ImageView3;
+    @FXML private ImageView player2_ImageView4;
+    @FXML private ImageView player2_ImageView5;
+    @FXML private ImageView player2_ImageView6;
+    @FXML private ImageView player2_ImageView7;
+
+    @FXML private Label player1_Label1;
+    @FXML private Label player1_Label2;
+    @FXML private Label player1_Label3;
+    @FXML private Label player1_Label4;
+    @FXML private Label player1_Label5;
+    @FXML private Label player1_Label6;
+    @FXML private Label player1_Label7;
+    @FXML private Label player2_Label1;
+    @FXML private Label player2_Label2;
+    @FXML private Label player2_Label3;
+    @FXML private Label player2_Label4;
+    @FXML private Label player2_Label5;
+    @FXML private Label player2_Label6;
+    @FXML private Label player2_Label7;
     @FXML private Label statusMessage;
-    @FXML private TextField userOne;
-    @FXML private TextField userTwo;
-    @FXML private BorderPane newGamePane;
+
+    @FXML private TextField player1_NameField;
+    @FXML private TextField player2_NameField;
+
+    @FXML private BorderPane menuPane;
+
     @FXML private Button newGameButton;
     @FXML private Button rematchButton;
+    //endregion
 
-    Image startCup = new Image("Resources/Pictures/cupstart.png");
-    Image mancalaImage_1 = new Image("Resources/Pictures/unavngivet1.png");
-    Image mancalaImage_2 = new Image("Resources/Pictures/unavngivet1.png");
+    //region IMAGE Fields
+    private Image startCup = new Image("Resources/Pictures/cupstart.png");
+    private Image mancalaImage_1 = new Image("Resources/Pictures/unavngivet1.png");
+    private Image mancalaImage_2 = new Image("Resources/Pictures/unavngivet1.png");
+    //endregion
 
+    //region GENERAL Fields
     private int noStones = 0;
-    private static Node tempNode = new Node(0, 0);
+    private Node tempNode = new Node(0, 0);
     private Node head = null;
     private Node tail = null;
-    private static Node nodeClicked;
-    private  ArrayList<Node> nodeArrayList = new ArrayList<>();
-    private  ArrayList<ImageView> imageViewArrayList = new ArrayList<ImageView>();
-    private  ArrayList<SimpleObjectProperty<Image>> imageArrayList = new ArrayList<>();
-
+    private Node nodeClicked;
+    private ArrayList<Node> nodeArrayList = new ArrayList<>();
+    private ArrayList<ImageView> imageViewArrayList = new ArrayList<ImageView>();
+    private ArrayList<SimpleObjectProperty<Image>> imageArrayList = new ArrayList<>();
+    private ArrayList<Label> labelArrayList = new ArrayList<>();
     private Player player1;
     private Player player2;
+    //endregion
+
+    //endregion
 
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        imageViewArrayList.add(cup1_1);
-        imageViewArrayList.add(cup1_2);
-        imageViewArrayList.add(cup1_3);
-        imageViewArrayList.add(cup1_4);
-        imageViewArrayList.add(cup1_5);
-        imageViewArrayList.add(cup1_6);
-        imageViewArrayList.add(mancala1);
-        imageViewArrayList.add(cup2_1);
-        imageViewArrayList.add(cup2_2);
-        imageViewArrayList.add(cup2_3);
-        imageViewArrayList.add(cup2_4);
-        imageViewArrayList.add(cup2_5);
-        imageViewArrayList.add(cup2_6);
-        imageViewArrayList.add(mancala2);
+    @FXML
+    public void initialize() {
+        imageViewArrayList.add(player1_ImageView1);
+        imageViewArrayList.add(player1_ImageView2);
+        imageViewArrayList.add(player1_ImageView3);
+        imageViewArrayList.add(player1_ImageView4);
+        imageViewArrayList.add(player1_ImageView5);
+        imageViewArrayList.add(player1_ImageView6);
+        imageViewArrayList.add(player1_ImageView7);
+        imageViewArrayList.add(player2_ImageView1);
+        imageViewArrayList.add(player2_ImageView2);
+        imageViewArrayList.add(player2_ImageView3);
+        imageViewArrayList.add(player2_ImageView4);
+        imageViewArrayList.add(player2_ImageView5);
+        imageViewArrayList.add(player2_ImageView6);
+        imageViewArrayList.add(player2_ImageView7);
         imageArrayList.add(new SimpleObjectProperty<>(new Image("Resources/Pictures/cup0.png")));
         imageArrayList.add(new SimpleObjectProperty<>(new Image("Resources/Pictures/cup1.png")));
         imageArrayList.add(new SimpleObjectProperty<>(new Image("Resources/Pictures/cup2.png")));
@@ -121,24 +138,44 @@ public class CircularLinkedList implements Initializable {
         imageArrayList.add(new SimpleObjectProperty<>(new Image("Resources/Pictures/cup21.png")));
         imageArrayList.add(new SimpleObjectProperty<>(new Image("Resources/Pictures/cup22.png")));
         imageArrayList.add(new SimpleObjectProperty<>(new Image("Resources/Pictures/cup23.png")));
+        labelArrayList.add(player1_Label1);
+        labelArrayList.add(player1_Label2);
+        labelArrayList.add(player1_Label3);
+        labelArrayList.add(player1_Label4);
+        labelArrayList.add(player1_Label5);
+        labelArrayList.add(player1_Label6);
+        labelArrayList.add(player1_Label7);
+        labelArrayList.add(player2_Label1);
+        labelArrayList.add(player2_Label2);
+        labelArrayList.add(player2_Label3);
+        labelArrayList.add(player2_Label4);
+        labelArrayList.add(player2_Label5);
+        labelArrayList.add(player2_Label6);
+        labelArrayList.add(player2_Label7);
 
         for (int i = 1; i < 15; i++) {
             int ID = i;
             if (imageViewArrayList.get(i - 1).equals(imageViewArrayList.get(13)) || imageViewArrayList.get(i).equals(
                     imageViewArrayList.get(7))) {
                 imageViewArrayList.get(i - 1).addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-                    nodeClicked = findCup(ID);
+                    nodeClicked = findNode(ID);
                     statusMessage.setText("Why would you empty the Mancala?");
                 });
             }
             else {
                 imageViewArrayList.get(i - 1).addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-                    nodeClicked = findCup(ID);
+                    nodeClicked = findNode(ID);
                     statusMessage.setText(null);
-                        moveStones();
+                    moveStones();
                 });
             }
         }
+
+
+        generateNewCups();
+        addCupsAsNodes();
+        resetImageViews();
+        bindCupsToProperties();
     }
 
 
@@ -148,7 +185,7 @@ public class CircularLinkedList implements Initializable {
      * @param findID - the id to search for
      * @return - returns the cup of the id searched for
      */
-    public Node findCup(int findID) {
+    public Node findNode(int findID) {
         Node currentNode = head;
 
         if (head == null) {
@@ -194,11 +231,11 @@ public class CircularLinkedList implements Initializable {
      * start by getting the cup that is clicked
      * then it sets the start cup = temp cup, which is after recursion 0.
      */
-    public void moveStones(){
+    public void moveStones() {
         Node node = nodeClicked;
-        tempNode.amountOfStones = node.amountOfStones;
+        tempNode.numOfBeans = node.numOfBeans;
         moveStonesRecursion(node);
-        node.amountOfStones = tempNode.amountOfStones;
+        node.numOfBeans = tempNode.numOfBeans;
     }
 
     /**
@@ -207,84 +244,76 @@ public class CircularLinkedList implements Initializable {
      *
      * @param node this is the cup sent from moveStonesHelper method, the first cup we move the stones from
      */
-    private void moveStonesRecursion(Node node){
+    private void moveStonesRecursion(Node node) {
         didGameEnd();
-        while (tempNode.amountOfStones.getValue() > noStones) {
+        while (tempNode.numOfBeans.getValue() > noStones) {
             if (player1.getMyTurn()) {
                 if (nodeClicked.ID > 0 && nodeClicked.ID < 7) {
                     if (node.nextNode.ID == 14) {
-                        tempNode.amountOfStones.set(tempNode.amountOfStones.getValue() - 1);
-                        node.nextNode.nextNode.amountOfStones.setValue(
-                                node.nextNode.nextNode.amountOfStones.getValue() + 1);
+                        tempNode.numOfBeans.set(tempNode.numOfBeans.getValue() - 1);
+                        node.nextNode.nextNode.numOfBeans.setValue(node.nextNode.nextNode.numOfBeans.getValue() + 1);
                         moveStonesRecursion(node.nextNode.nextNode);
                     }
                     else {
-                        tempNode.amountOfStones.set(tempNode.amountOfStones.getValue() - 1);
-                        node.nextNode.amountOfStones.setValue(node.nextNode.amountOfStones.getValue() + 1);
+                        tempNode.numOfBeans.set(tempNode.numOfBeans.getValue() - 1);
+                        node.nextNode.numOfBeans.setValue(node.nextNode.numOfBeans.getValue() + 1);
                         moveStonesRecursion(node.nextNode);
                     }
-                    nextPlayersTurn(node);
                 }
                 else {
                     statusMessage.setText("It's " + player1.getUserName() + " Playing ");
                     break;
                 }
-
+                nextPlayersTurn(node);
             }
             else if (player2.getMyTurn()) {
-                if (nodeClicked.ID > 7 && nodeClicked.ID < 14) {
-                    if (node.nextNode.ID == 7) {
-                        tempNode.amountOfStones.set(tempNode.amountOfStones.getValue() - 1);
-                        node.nextNode.nextNode.amountOfStones.setValue(
-                                node.nextNode.nextNode.amountOfStones.getValue() + 1);
-                        moveStonesRecursion(node.nextNode.nextNode);
+                    if (nodeClicked.ID > 7 && nodeClicked.ID < 14) {
+                        if (node.nextNode.ID == 7) {
+                            tempNode.numOfBeans.set(tempNode.numOfBeans.getValue() - 1);
+                            node.nextNode.nextNode.numOfBeans.setValue(node.nextNode.nextNode.numOfBeans.getValue() + 1);
+                            moveStonesRecursion(node.nextNode.nextNode);
+                        }
+                        else {
+                            tempNode.numOfBeans.set(tempNode.numOfBeans.getValue() - 1);
+                            node.nextNode.numOfBeans.setValue(node.nextNode.numOfBeans.getValue() + 1);
+                            moveStonesRecursion(node.nextNode);
+                        }
                     }
-                    else {
-                        tempNode.amountOfStones.set(tempNode.amountOfStones.getValue() - 1);
-                        node.nextNode.amountOfStones.setValue(node.nextNode.amountOfStones.getValue() + 1);
-                        moveStonesRecursion(node.nextNode);
-                    }
-                    nextPlayersTurn(node);
                 }
-                else {
+                else{
 
                     statusMessage.setText("It's " + player2.getUserName() + " Playing ");
                     break;
                 }
+            nextPlayersTurn(node);
             }
-
         }
-
-    }
 
     public void didGameEnd() {
 
-        if (nodeArrayList.get(0).amountOfStones.intValue() == 0 && nodeArrayList.get(
-                1).amountOfStones.intValue() == 0 && nodeArrayList.get(
-                2).amountOfStones.intValue() == 0 && nodeArrayList.get(
-                3).amountOfStones.intValue() == 0 && nodeArrayList.get(
-                4).amountOfStones.intValue() == 0 && nodeArrayList.get(
-                5).amountOfStones.intValue() == 0)
-        {
+        if (nodeArrayList.get(0).numOfBeans.intValue() == 0 && nodeArrayList.get(
+                1).numOfBeans.intValue() == 0 && nodeArrayList.get(
+                2).numOfBeans.intValue() == 0 && nodeArrayList.get(
+                3).numOfBeans.intValue() == 0 && nodeArrayList.get(
+                4).numOfBeans.intValue() == 0 && nodeArrayList.get(
+                5).numOfBeans.intValue() == 0) {
             endGameScreen();
         }
-        else if (nodeArrayList.get(7).amountOfStones.intValue() == 0 && nodeArrayList.get(
-                8).amountOfStones.intValue() == 0 && nodeArrayList.get(
-                9).amountOfStones.intValue() == 0 && nodeArrayList.get(
-                10).amountOfStones.intValue() == 0 && nodeArrayList.get(
-                11).amountOfStones.intValue() == 0 && nodeArrayList.get(
-                12).amountOfStones.intValue() == 0)
-        {
+        else if (nodeArrayList.get(7).numOfBeans.intValue() == 0 && nodeArrayList.get(
+                8).numOfBeans.intValue() == 0 && nodeArrayList.get(
+                9).numOfBeans.intValue() == 0 && nodeArrayList.get(
+                10).numOfBeans.intValue() == 0 && nodeArrayList.get(
+                11).numOfBeans.intValue() == 0 && nodeArrayList.get(
+                12).numOfBeans.intValue() == 0) {
             endGameScreen();
         }
-
 
 
     }
 
     private void endGameScreen() {
         movetoMancala();
-        if (nodeArrayList.get(6).amountOfStones.intValue() < nodeArrayList.get(13).amountOfStones.intValue()){
+        if (nodeArrayList.get(6).numOfBeans.intValue() < nodeArrayList.get(13).numOfBeans.intValue()) {
             statusMessage.setText(player2.getUserName() + " has Won");
         }
         else {
@@ -294,35 +323,48 @@ public class CircularLinkedList implements Initializable {
         newGameButton.setVisible(true);
     }
 
-    public void movetoMancala(){
+    public void movetoMancala() {
         for (Node node : nodeArrayList) {
-            if (node.ID >= 0 && node.ID < 7){
-                nodeArrayList.get(6).amountOfStones.setValue(
-                        nodeArrayList.get(6).amountOfStones.intValue() + node.amountOfStones.intValue());
-                node.amountOfStones.setValue(0);
+            if (node.ID >= 0 && node.ID < 7) {
+                nodeArrayList.get(6).numOfBeans.setValue(
+                        nodeArrayList.get(6).numOfBeans.intValue() + node.numOfBeans.intValue());
+                node.numOfBeans.setValue(0);
             }
-            else if (node.ID > 7 && node.ID < 14){
-                nodeArrayList.get(13).amountOfStones.setValue(
-                        nodeArrayList.get(13).amountOfStones.intValue() + node.amountOfStones.intValue());
-                node.amountOfStones.setValue(0);
+            else if (node.ID > 7 && node.ID < 14) {
+                nodeArrayList.get(13).numOfBeans.setValue(
+                        nodeArrayList.get(13).numOfBeans.intValue() + node.numOfBeans.intValue());
+                node.numOfBeans.setValue(0);
             }
         }
 
     }
 
-public void showMenu(){
+    public void showMenu() {
         newGameButton.setVisible(false);
         rematchButton.setVisible(false);
-        newGamePane.setVisible(true);
-}
-public void rematch(){
-        newGame();
-}
+        menuPane.setVisible(true);
+    }
+
+    public void startMatch() {
+        for (Node node : nodeArrayList) {
+            if (nodeArrayList.indexOf(node) == 6 || nodeArrayList.indexOf(node) == 13) {
+                node.numOfBeans.setValue(0);
+            }
+            else {
+                node.numOfBeans.setValue(6);
+            }
+        }
+        generateNewPlayers();
+        menuPane.setVisible(false);
+        statusMessage.setText(null);
+        newGameButton.setVisible(false);
+        rematchButton.setVisible(false);
+    }
 
 
     public void generateNewPlayers() {
-        player1 = new Player(true, userOne.getText());
-        player2 = new Player(false, userTwo.getText());
+        player1 = new Player(true, player1_NameField.getText());
+        player2 = new Player(false, player2_NameField.getText());
     }
 
     public void generateNewCups() {
@@ -375,10 +417,10 @@ public void rematch(){
 
     public void resetImageViews() {
         for (ImageView imageView : imageViewArrayList) {
-            if (imageView.equals(mancala1)) {
+            if (imageView.equals(player1_ImageView7)) {
                 imageView.setImage(mancalaImage_1);
             }
-            else if (imageView.equals(mancala2)) {
+            else if (imageView.equals(player2_ImageView7)) {
                 imageView.setImage(mancalaImage_2);
             }
             else {
@@ -391,93 +433,87 @@ public void rematch(){
         for (Node node : nodeArrayList) {
             switch (node.ID) {
                 case 1: {
-                    label1_1.textProperty().bind(node.amountOfStones.asString());
-                    node.amountOfStones.addListener((observable, oldValue, newValue) -> cup1_1.imageProperty().bind(
-                            imageArrayList.get(Integer.parseInt(label1_1.getText()))));
+                    player1_Label1.textProperty().bind(node.numOfBeans.asString());
+                    node.numOfBeans.addListener(
+                            (observable, oldValue, newValue) -> player1_ImageView1.imageProperty().bind(
+                                    imageArrayList.get(Integer.parseInt(player1_Label1.getText()))));
                 }
                 case 2: {
-                    label1_2.textProperty().bind(node.amountOfStones.asString());
-                    node.amountOfStones.addListener((observable, oldValue, newValue) -> cup1_2.imageProperty().bind(
-                            imageArrayList.get(Integer.parseInt(label1_2.getText()))));
+                    player1_Label2.textProperty().bind(node.numOfBeans.asString());
+                    node.numOfBeans.addListener(
+                            (observable, oldValue, newValue) -> player1_ImageView2.imageProperty().bind(
+                                    imageArrayList.get(Integer.parseInt(player1_Label2.getText()))));
                 }
                 case 3: {
-                    label1_3.textProperty().bind(node.amountOfStones.asString());
-                    node.amountOfStones.addListener((observable, oldValue, newValue) -> cup1_3.imageProperty().bind(
-                            imageArrayList.get(Integer.parseInt(label1_3.getText()))));
+                    player1_Label3.textProperty().bind(node.numOfBeans.asString());
+                    node.numOfBeans.addListener(
+                            (observable, oldValue, newValue) -> player1_ImageView3.imageProperty().bind(
+                                    imageArrayList.get(Integer.parseInt(player1_Label3.getText()))));
                 }
                 case 4: {
-                    label1_4.textProperty().bind(node.amountOfStones.asString());
-                    node.amountOfStones.addListener((observable, oldValue, newValue) -> cup1_4.imageProperty().bind(
-                            imageArrayList.get(Integer.parseInt(label1_4.getText()))));
+                    player1_Label4.textProperty().bind(node.numOfBeans.asString());
+                    node.numOfBeans.addListener(
+                            (observable, oldValue, newValue) -> player1_ImageView4.imageProperty().bind(
+                                    imageArrayList.get(Integer.parseInt(player1_Label4.getText()))));
                 }
                 case 5: {
-                    label1_5.textProperty().bind(node.amountOfStones.asString());
-                    node.amountOfStones.addListener((observable, oldValue, newValue) -> cup1_5.imageProperty().bind(
-                            imageArrayList.get(Integer.parseInt(label1_5.getText()))));
+                    player1_Label5.textProperty().bind(node.numOfBeans.asString());
+                    node.numOfBeans.addListener(
+                            (observable, oldValue, newValue) -> player1_ImageView5.imageProperty().bind(
+                                    imageArrayList.get(Integer.parseInt(player1_Label5.getText()))));
                 }
                 case 6: {
-                    label1_6.textProperty().bind(node.amountOfStones.asString());
-                    node.amountOfStones.addListener((observable, oldValue, newValue) -> cup1_6.imageProperty().bind(
-                            imageArrayList.get(Integer.parseInt(label1_6.getText()))));
+                    player1_Label6.textProperty().bind(node.numOfBeans.asString());
+                    node.numOfBeans.addListener(
+                            (observable, oldValue, newValue) -> player1_ImageView6.imageProperty().bind(
+                                    imageArrayList.get(Integer.parseInt(player1_Label6.getText()))));
                 }
                 case 7: {
-                    label1_7.textProperty().bind(node.amountOfStones.asString());
+                    player1_Label7.textProperty().bind(node.numOfBeans.asString());
                     //no listener here since mancala's dont need to update the image
                 }
                 case 8: {
-                    label2_1.textProperty().bind(node.amountOfStones.asString());
-                    node.amountOfStones.addListener(
-                            (observable, oldValue, newValue) -> cup2_1.imageProperty().bind(
-                                    imageArrayList.get(Integer.parseInt(label2_1.getText()))));
+                    player2_Label1.textProperty().bind(node.numOfBeans.asString());
+                    node.numOfBeans.addListener(
+                            (observable, oldValue, newValue) -> player2_ImageView1.imageProperty().bind(
+                                    imageArrayList.get(Integer.parseInt(player2_Label1.getText()))));
                 }
                 case 9: {
-                    label2_2.textProperty().bind(node.amountOfStones.asString());
-                    node.amountOfStones.addListener(
-                            (observable, oldValue, newValue) -> cup2_2.imageProperty().bind(
-                                    imageArrayList.get(Integer.parseInt(label2_2.getText()))));
+                    player2_Label2.textProperty().bind(node.numOfBeans.asString());
+                    node.numOfBeans.addListener(
+                            (observable, oldValue, newValue) -> player2_ImageView2.imageProperty().bind(
+                                    imageArrayList.get(Integer.parseInt(player2_Label2.getText()))));
                 }
                 case 10: {
-                    label2_3.textProperty().bind(node.amountOfStones.asString());
-                    node.amountOfStones.addListener(
-                            (observable, oldValue, newValue) -> cup2_3.imageProperty().bind(
-                                    imageArrayList.get(Integer.parseInt(label2_3.getText()))));
+                    player2_Label3.textProperty().bind(node.numOfBeans.asString());
+                    node.numOfBeans.addListener(
+                            (observable, oldValue, newValue) -> player2_ImageView3.imageProperty().bind(
+                                    imageArrayList.get(Integer.parseInt(player2_Label3.getText()))));
                 }
                 case 11: {
-                    label2_4.textProperty().bind(node.amountOfStones.asString());
-                    node.amountOfStones.addListener(
-                            (observable, oldValue, newValue) -> cup2_4.imageProperty().bind(
-                                    imageArrayList.get(Integer.parseInt(label2_4.getText()))));
+                    player2_Label4.textProperty().bind(node.numOfBeans.asString());
+                    node.numOfBeans.addListener(
+                            (observable, oldValue, newValue) -> player2_ImageView4.imageProperty().bind(
+                                    imageArrayList.get(Integer.parseInt(player2_Label4.getText()))));
                 }
                 case 12: {
-                    label2_5.textProperty().bind(node.amountOfStones.asString());
-                    node.amountOfStones.addListener(
-                            (observable, oldValue, newValue) -> cup2_5.imageProperty().bind(
-                                    imageArrayList.get(Integer.parseInt(label2_5.getText()))));
+                    player2_Label5.textProperty().bind(node.numOfBeans.asString());
+                    node.numOfBeans.addListener(
+                            (observable, oldValue, newValue) -> player2_ImageView5.imageProperty().bind(
+                                    imageArrayList.get(Integer.parseInt(player2_Label5.getText()))));
                 }
                 case 13: {
-                    label2_6.textProperty().bind(node.amountOfStones.asString());
-                    node.amountOfStones.addListener(
-                            (observable, oldValue, newValue) -> cup2_6.imageProperty().bind(
-                                    imageArrayList.get(Integer.parseInt(label2_6.getText()))));
+                    player2_Label6.textProperty().bind(node.numOfBeans.asString());
+                    node.numOfBeans.addListener(
+                            (observable, oldValue, newValue) -> player2_ImageView6.imageProperty().bind(
+                                    imageArrayList.get(Integer.parseInt(player2_Label6.getText()))));
                 }
                 case 14: {
-                    label2_7.textProperty().bind(node.amountOfStones.asString());
+                    player2_Label7.textProperty().bind(node.numOfBeans.asString());
                     //no listener here since mancala's dont need to update the image
                 }
             }
         }
     }
 
-    public void hideNewGameMenu() {
-        newGamePane.setVisible(false);
-    }
-
-    public void newGame() {
-        generateNewCups();
-        generateNewPlayers();
-        addCupsAsNodes();
-        resetImageViews();
-        bindCupsToProperties();
-        hideNewGameMenu();
-    }
 }
