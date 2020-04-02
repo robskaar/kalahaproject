@@ -1,7 +1,8 @@
 package Domain;
 
-import javafx.beans.property.IntegerProperty;
+
 import javafx.beans.property.SimpleIntegerProperty;
+
 
 /**
  * @Author Robert Skaar
@@ -9,14 +10,18 @@ import javafx.beans.property.SimpleIntegerProperty;
  * @Date 26-03-2020
  **/
 
-public class Cup {
+public class Node {
 
      public final int ID;
         public SimpleIntegerProperty amountOfStones;
-        public Cup nextCup;
+        public Node nextNode;
 
-        public Cup(int amountOfStones, int ID) {
+        public Node(int amountOfStones, int ID) {
             this.amountOfStones = new SimpleIntegerProperty(amountOfStones);
             this.ID = ID;
         }
+
+
+
+
 }
