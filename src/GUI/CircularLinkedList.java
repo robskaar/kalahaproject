@@ -18,10 +18,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
 import java.util.ArrayList;
+
 
 /**
  * this class Game is actually a circular linked list, and cup's are like the nodes, this class is also assigned as the controller.
@@ -35,48 +36,82 @@ public class CircularLinkedList {
     //region Region of Fields
 
     //region FXML Fields
-    @FXML private ImageView player1_ImageView1;
-    @FXML private ImageView player1_ImageView2;
-    @FXML private ImageView player1_ImageView3;
-    @FXML private ImageView player1_ImageView4;
-    @FXML private ImageView player1_ImageView5;
-    @FXML private ImageView player1_ImageView6;
-    @FXML private ImageView player1_ImageView7;
-    @FXML private ImageView player2_ImageView1;
-    @FXML private ImageView player2_ImageView2;
-    @FXML private ImageView player2_ImageView3;
-    @FXML private ImageView player2_ImageView4;
-    @FXML private ImageView player2_ImageView5;
-    @FXML private ImageView player2_ImageView6;
-    @FXML private ImageView player2_ImageView7;
+    @FXML
+    private ImageView player1_ImageView1;
+    @FXML
+    private ImageView player1_ImageView2;
+    @FXML
+    private ImageView player1_ImageView3;
+    @FXML
+    private ImageView player1_ImageView4;
+    @FXML
+    private ImageView player1_ImageView5;
+    @FXML
+    private ImageView player1_ImageView6;
+    @FXML
+    private ImageView player1_ImageView7;
+    @FXML
+    private ImageView player2_ImageView1;
+    @FXML
+    private ImageView player2_ImageView2;
+    @FXML
+    private ImageView player2_ImageView3;
+    @FXML
+    private ImageView player2_ImageView4;
+    @FXML
+    private ImageView player2_ImageView5;
+    @FXML
+    private ImageView player2_ImageView6;
+    @FXML
+    private ImageView player2_ImageView7;
 
-    @FXML private Label player1_Label1;
-    @FXML private Label player1_Label2;
-    @FXML private Label player1_Label3;
-    @FXML private Label player1_Label4;
-    @FXML private Label player1_Label5;
-    @FXML private Label player1_Label6;
-    @FXML private Label player1_Label7;
-    @FXML private Label player2_Label1;
-    @FXML private Label player2_Label2;
-    @FXML private Label player2_Label3;
-    @FXML private Label player2_Label4;
-    @FXML private Label player2_Label5;
-    @FXML private Label player2_Label6;
-    @FXML private Label player2_Label7;
-    @FXML private Label statusMessage;
+    @FXML
+    private Label player1_Label1;
+    @FXML
+    private Label player1_Label2;
+    @FXML
+    private Label player1_Label3;
+    @FXML
+    private Label player1_Label4;
+    @FXML
+    private Label player1_Label5;
+    @FXML
+    private Label player1_Label6;
+    @FXML
+    private Label player1_Label7;
+    @FXML
+    private Label player2_Label1;
+    @FXML
+    private Label player2_Label2;
+    @FXML
+    private Label player2_Label3;
+    @FXML
+    private Label player2_Label4;
+    @FXML
+    private Label player2_Label5;
+    @FXML
+    private Label player2_Label6;
+    @FXML
+    private Label player2_Label7;
+    @FXML
+    private Label statusMessage;
 
-    @FXML private TextField player1_NameField;
-    @FXML private TextField player2_NameField;
+    @FXML
+    private TextField player1_NameField;
+    @FXML
+    private TextField player2_NameField;
 
-    @FXML private BorderPane menuPane;
+    @FXML
+    private AnchorPane menuPane;
 
-    @FXML private Button newGameButton;
-    @FXML private Button rematchButton;
+    @FXML
+    private Button newGameButton;
+    @FXML
+    private Button rematchButton;
     //endregion
 
     //region IMAGE Fields
-    private Image startCup = new Image("Resources/Pictures/cupstart.png");
+    private Image startCup = new Image("Resources/Pictures/cup6.png");
     private Image mancalaImage = new Image("Resources/Pictures/mancala.png");
     //endregion
 
@@ -90,6 +125,8 @@ public class CircularLinkedList {
     private ArrayList<SimpleObjectProperty<Image>> imageArrayList = new ArrayList<>();
     private Player player1;
     private Player player2;
+    private boolean zeroInNext = false;
+    private boolean notZeroAccross = false;
     //endregion
 
     //endregion
@@ -102,7 +139,6 @@ public class CircularLinkedList {
         initializeImageArrayList();
         initializeImageViews();
         initializeNodes();
-        initializeImageViews();
         bindNodesToProperties();
 
         for (int i = 1; i < 15; i++) {
@@ -135,19 +171,19 @@ public class CircularLinkedList {
 
     //creates and adds nodes to the circular linked list
     private void initializeNodes() {
-        Node node1 = new Node(4, 1);
-        Node node2 = new Node(4, 2);
-        Node node3 = new Node(4, 3);
-        Node node4 = new Node(4, 4);
-        Node node5 = new Node(4, 5);
-        Node node6 = new Node(4, 6);
+        Node node1 = new Node(6, 1);
+        Node node2 = new Node(6, 2);
+        Node node3 = new Node(6, 3);
+        Node node4 = new Node(6, 4);
+        Node node5 = new Node(6, 5);
+        Node node6 = new Node(6, 6);
         Node node7 = new Node(0, 7);
-        Node node8 = new Node(4, 8);
-        Node node9 = new Node(4, 9);
-        Node node10 = new Node(4, 10);
-        Node node11 = new Node(4, 11);
-        Node node12 = new Node(4, 12);
-        Node node13 = new Node(4, 13);
+        Node node8 = new Node(6, 8);
+        Node node9 = new Node(6, 9);
+        Node node10 = new Node(6, 10);
+        Node node11 = new Node(6, 11);
+        Node node12 = new Node(6, 12);
+        Node node13 = new Node(6, 13);
         Node node14 = new Node(0, 14);
         nodeArrayList = new ArrayList<Node>() {{
             add(node1);
@@ -266,11 +302,27 @@ public class CircularLinkedList {
     private void moveStones() {
 
         currentNode = nodeClicked; // set the first node
-
+        int moves = currentNode.numOfBeans.intValue();
         Timeline timeline = new Timeline();   // slows down so you see movement of game, also works as "recursion"
         timeline.setCycleCount(nodeClicked.numOfBeans.intValue());
         timeline.setAutoReverse(false);
         timeline.getKeyFrames().add(new KeyFrame(Duration.millis(350), e -> {
+            int count = 0;
+            count++;
+            if (count == moves) {
+                if (currentNode.nextNode.numOfBeans.intValue() == 0) {
+                    zeroInNext = true;
+                    if (opposite(currentNode.nextNode).numOfBeans.intValue() > 0) {
+                        notZeroAccross = true;
+                    }
+                    else {
+                        notZeroAccross = false;
+                    }
+                }
+                else {
+                    zeroInNext = false;
+                }
+            }
             currentNode = currentNode.nextNode; // set next node for each cycle
             if (player1.getMyTurn()) {
                 if (nodeClicked.ID > 0 && nodeClicked.ID < 7) { // if node clicked is player 1's nodes
@@ -294,13 +346,74 @@ public class CircularLinkedList {
                             currentNode.numOfBeans.getValue() + 1);// increase value of next nodes
                 }
             }
+
         }));
         timeline.play();
         timeline.setOnFinished(e -> {
+            if (zeroInNext) {
+                if (notZeroAccross) {
+                    moveOn0();
+                }
+            }
             evaluateWhoPlay();
             endGame(didGameEnd());
         });
     }
+
+    public Node opposite(Node node) {
+        switch (node.ID) {
+            case 1:
+                return findNode(13);
+            case 2:
+                return findNode(12);
+            case 3:
+                return findNode(11);
+            case 4:
+                return findNode(10);
+            case 5:
+                return findNode(9);
+            case 6:
+                return findNode(8);
+            case 8:
+                return findNode(6);
+            case 9:
+                return findNode(5);
+            case 10:
+                return findNode(4);
+            case 11:
+                return findNode(3);
+            case 12:
+                return findNode(2);
+            case 13:
+                return findNode(1);
+        }
+        return null;
+    }
+
+    public void moveOn0() {
+        if (currentNode.ID != 7 && currentNode.ID != 14) {
+            if (currentNode.ID > 0 && currentNode.ID < 7) {
+                if (currentNode.numOfBeans.intValue() == 1) {
+                    Node mancala1 = findNode(7);
+                    Node opposite = opposite(currentNode);
+                    mancala1.numOfBeans.setValue(mancala1.numOfBeans.intValue() + currentNode.numOfBeans.intValue() + opposite.numOfBeans.intValue());
+                    opposite.numOfBeans.setValue(0);
+                    currentNode.numOfBeans.setValue(0);
+                }
+            }
+            else if (currentNode.ID < 14 && currentNode.ID > 7) {
+                if (currentNode.numOfBeans.intValue() == 1) {
+                    Node mancala2 = findNode(14);
+                    Node opposite = opposite(currentNode);
+                    mancala2.numOfBeans.setValue(mancala2.numOfBeans.intValue() + currentNode.numOfBeans.intValue() + opposite.numOfBeans.intValue());
+                    opposite.numOfBeans.setValue(0);
+                    currentNode.numOfBeans.setValue(0);
+                }
+            }
+
+        }
+    }
+
 
     /**
      * evaluates what player should play next

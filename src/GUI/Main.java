@@ -12,13 +12,13 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception {
         javafx.scene.image.Image cursor = new Image("Resources/Pictures/Cursor.png");
 
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("Hello World");
         primaryStage.setFullScreen(true);
-        primaryStage.setScene(new Scene(root, 1264, 897));
+        primaryStage.setScene(new Scene(root, 1920, 1080));
         root.setCursor(new ImageCursor(cursor));
         primaryStage.show();
     }

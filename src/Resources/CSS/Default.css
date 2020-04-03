@@ -3,25 +3,17 @@
     src: url('Tomodachy.otf');
 }
 
-.BackgroundPane{
+.GameBoard{
     -fx-background-color: transparent;
     -fx-background-image: url('../Pictures/Table.jpeg');
     -fx-background-repeat: no-repeat;
     -fx-background-size: cover;
     -fx-background-position: center;
-
-}
-
-.GameBoard{
-    -fx-background-color: transparent;
-    -fx-background-image: url('../Pictures/coffeebeanspread.png');
-    -fx-background-repeat: no-repeat;
-    -fx-background-size: 200;
 }
 
 .StatusMessage{
     -fx-text-fill: white;
-    -fx-font-size: 50;
+    -fx-font-size: 25;
 }
 .menuPane{
     -fx-background-color: transparent;
