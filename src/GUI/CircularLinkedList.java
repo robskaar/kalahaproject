@@ -77,20 +77,17 @@ public class CircularLinkedList {
 
     //region IMAGE Fields
     private Image startCup = new Image("Resources/Pictures/cupstart.png");
-    private Image mancalaImage_1 = new Image("Resources/Pictures/unavngivet1.png");
-    private Image mancalaImage_2 = new Image("Resources/Pictures/unavngivet1.png");
+    private Image mancalaImage = new Image("Resources/Pictures/mancala.png");
     //endregion
 
     //region GENERAL Fields
-    private int noStones = 0;
-    private Node tempNode = new Node(0, 0);
     private Node head = null;
     private Node tail = null;
     private Node nodeClicked;
+    private Node currentNode;
     private ArrayList<Node> nodeArrayList = new ArrayList<>();
     private ArrayList<ImageView> imageViewArrayList = new ArrayList<ImageView>();
     private ArrayList<SimpleObjectProperty<Image>> imageArrayList = new ArrayList<>();
-    private ArrayList<Label> labelArrayList = new ArrayList<>();
     private Player player1;
     private Player player2;
     //endregion
@@ -100,20 +97,90 @@ public class CircularLinkedList {
 
     @FXML
     public void initialize() {
-        imageViewArrayList.add(player1_ImageView1);
-        imageViewArrayList.add(player1_ImageView2);
-        imageViewArrayList.add(player1_ImageView3);
-        imageViewArrayList.add(player1_ImageView4);
-        imageViewArrayList.add(player1_ImageView5);
-        imageViewArrayList.add(player1_ImageView6);
-        imageViewArrayList.add(player1_ImageView7);
-        imageViewArrayList.add(player2_ImageView1);
-        imageViewArrayList.add(player2_ImageView2);
-        imageViewArrayList.add(player2_ImageView3);
-        imageViewArrayList.add(player2_ImageView4);
-        imageViewArrayList.add(player2_ImageView5);
-        imageViewArrayList.add(player2_ImageView6);
-        imageViewArrayList.add(player2_ImageView7);
+
+
+        initializeImageArrayList();
+        initializeImageViews();
+        initializeNodes();
+        initializeImageViews();
+        bindNodesToProperties();
+
+        for (int i = 1; i < 15; i++) {
+            int ID = i;
+            if (imageViewArrayList.get(i - 1).equals(imageViewArrayList.get(13)) || imageViewArrayList.get(i).equals(
+                    imageViewArrayList.get(7))) {
+                imageViewArrayList.get(i - 1).addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+                    nodeClicked = findNode(ID);
+                    statusMessage.setText("Why would you empty the Mancala?");
+                });
+            }
+            else {
+                imageViewArrayList.get(i - 1).addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+                    nodeClicked = findNode(ID);
+                    statusMessage.setText(null);
+                    moveStones();
+                });
+            }
+        }
+
+
+    }
+
+    //creates the players
+    private void initializePlayers() {
+        player1 = new Player(true, player1_NameField.getText());
+        player2 = new Player(false, player2_NameField.getText());
+    }
+
+
+    //creates and adds nodes to the circular linked list
+    private void initializeNodes() {
+        Node node1 = new Node(4, 1);
+        Node node2 = new Node(4, 2);
+        Node node3 = new Node(4, 3);
+        Node node4 = new Node(4, 4);
+        Node node5 = new Node(4, 5);
+        Node node6 = new Node(4, 6);
+        Node node7 = new Node(0, 7);
+        Node node8 = new Node(4, 8);
+        Node node9 = new Node(4, 9);
+        Node node10 = new Node(4, 10);
+        Node node11 = new Node(4, 11);
+        Node node12 = new Node(4, 12);
+        Node node13 = new Node(4, 13);
+        Node node14 = new Node(0, 14);
+        nodeArrayList = new ArrayList<Node>() {{
+            add(node1);
+            add(node2);
+            add(node3);
+            add(node4);
+            add(node5);
+            add(node6);
+            add(node7);
+            add(node8);
+            add(node9);
+            add(node10);
+            add(node11);
+            add(node12);
+            add(node13);
+            add(node14);
+        }};
+        for (Node node : nodeArrayList) {
+            if (head == null) {
+                head = node;
+            }
+            else {
+                tail.nextNode = node;
+            }
+
+            tail = node;
+            tail.nextNode = head;
+        }
+    }
+
+
+    //adds images to image array
+    private void initializeImageArrayList() {
         imageArrayList.add(new SimpleObjectProperty<>(new Image("Resources/Pictures/cup0.png")));
         imageArrayList.add(new SimpleObjectProperty<>(new Image("Resources/Pictures/cup1.png")));
         imageArrayList.add(new SimpleObjectProperty<>(new Image("Resources/Pictures/cup2.png")));
@@ -138,54 +205,43 @@ public class CircularLinkedList {
         imageArrayList.add(new SimpleObjectProperty<>(new Image("Resources/Pictures/cup21.png")));
         imageArrayList.add(new SimpleObjectProperty<>(new Image("Resources/Pictures/cup22.png")));
         imageArrayList.add(new SimpleObjectProperty<>(new Image("Resources/Pictures/cup23.png")));
-        labelArrayList.add(player1_Label1);
-        labelArrayList.add(player1_Label2);
-        labelArrayList.add(player1_Label3);
-        labelArrayList.add(player1_Label4);
-        labelArrayList.add(player1_Label5);
-        labelArrayList.add(player1_Label6);
-        labelArrayList.add(player1_Label7);
-        labelArrayList.add(player2_Label1);
-        labelArrayList.add(player2_Label2);
-        labelArrayList.add(player2_Label3);
-        labelArrayList.add(player2_Label4);
-        labelArrayList.add(player2_Label5);
-        labelArrayList.add(player2_Label6);
-        labelArrayList.add(player2_Label7);
+    }
 
-        for (int i = 1; i < 15; i++) {
-            int ID = i;
-            if (imageViewArrayList.get(i - 1).equals(imageViewArrayList.get(13)) || imageViewArrayList.get(i).equals(
-                    imageViewArrayList.get(7))) {
-                imageViewArrayList.get(i - 1).addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-                    nodeClicked = findNode(ID);
-                    statusMessage.setText("Why would you empty the Mancala?");
-                });
+    //adds images to array, and sets the starting image
+    private void initializeImageViews() {
+        imageViewArrayList.add(player1_ImageView1);
+        imageViewArrayList.add(player1_ImageView2);
+        imageViewArrayList.add(player1_ImageView3);
+        imageViewArrayList.add(player1_ImageView4);
+        imageViewArrayList.add(player1_ImageView5);
+        imageViewArrayList.add(player1_ImageView6);
+        imageViewArrayList.add(player1_ImageView7);
+        imageViewArrayList.add(player2_ImageView1);
+        imageViewArrayList.add(player2_ImageView2);
+        imageViewArrayList.add(player2_ImageView3);
+        imageViewArrayList.add(player2_ImageView4);
+        imageViewArrayList.add(player2_ImageView5);
+        imageViewArrayList.add(player2_ImageView6);
+        imageViewArrayList.add(player2_ImageView7);
+
+        for (ImageView imageView : imageViewArrayList) {
+            if (imageView.equals(player1_ImageView7) || imageView.equals(player2_ImageView7)) {
+                imageView.setImage(mancalaImage);
             }
             else {
-                imageViewArrayList.get(i - 1).addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-                    nodeClicked = findNode(ID);
-                    statusMessage.setText(null);
-                    moveStones();
-                });
+                imageView.imageProperty().setValue(startCup);
             }
         }
-
-
-        generateNewCups();
-        addCupsAsNodes();
-        resetImageViews();
-        bindCupsToProperties();
     }
 
 
     /**
-     * this methods finds a cup by its given ID
+     * Find a node based upon the ID it
      *
-     * @param findID - the id to search for
-     * @return - returns the cup of the id searched for
+     * @param findID - the id of the node to find
+     * @return - returns the node with the given ID
      */
-    public Node findNode(int findID) {
+    private Node findNode(int findID) {
         Node currentNode = head;
 
         if (head == null) {
@@ -204,100 +260,123 @@ public class CircularLinkedList {
         }
     }
 
-
-    public void nextPlayersTurn(Node node) {
-        if (player1.getMyTurn()) {
-            if (node.ID == 7) {
-
-            }
-            else {
-                player1.setMyTurn(false);
-                player2.setMyTurn(true);
-            }
-        }
-        else {
-            if (node.ID == 14) {
-
-            }
-            else {
-                player1.setMyTurn(true);
-                player2.setMyTurn(false);
-            }
-        }
-    }
-
     /**
-     * this method works as an "API" to the recursion method below.
-     * start by getting the cup that is clicked
-     * then it sets the start cup = temp cup, which is after recursion 0.
+     * moves the stones
      */
-    public void moveStones() {
-        Node node = nodeClicked;
-        tempNode.numOfBeans = node.numOfBeans;
-        moveStonesRecursion(node);
-        node.numOfBeans = tempNode.numOfBeans;
-    }
+    private void moveStones() {
 
-    /**
-     * this method does the recursive movements of stones until 0 stones in the first cup
-     * TODO fix the next turn bullshit
-     *
-     * @param node this is the cup sent from moveStonesHelper method, the first cup we move the stones from
-     */
-    private void moveStonesRecursion(Node node) {
-        didGameEnd();
-        while (tempNode.numOfBeans.getValue() > noStones) {
+        currentNode = nodeClicked; // set the first node
+
+        Timeline timeline = new Timeline();   // slows down so you see movement of game, also works as "recursion"
+        timeline.setCycleCount(nodeClicked.numOfBeans.intValue());
+        timeline.setAutoReverse(false);
+        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(350), e -> {
+            currentNode = currentNode.nextNode; // set next node for each cycle
             if (player1.getMyTurn()) {
-                if (nodeClicked.ID > 0 && nodeClicked.ID < 7) {
-                    if (node.nextNode.ID == 14) {
-                        tempNode.numOfBeans.set(tempNode.numOfBeans.getValue() - 1);
-                        node.nextNode.nextNode.numOfBeans.setValue(node.nextNode.nextNode.numOfBeans.getValue() + 1);
-                        moveStonesRecursion(node.nextNode.nextNode);
+                if (nodeClicked.ID > 0 && nodeClicked.ID < 7) { // if node clicked is player 1's nodes
+                    if (currentNode.ID == 14) { // if node is mancala of opposite player
+                        currentNode = currentNode.nextNode; // go to next
                     }
-                    else {
-                        tempNode.numOfBeans.set(tempNode.numOfBeans.getValue() - 1);
-                        node.nextNode.numOfBeans.setValue(node.nextNode.numOfBeans.getValue() + 1);
-                        moveStonesRecursion(node.nextNode);
-                    }
+                    nodeClicked.numOfBeans.set(
+                            nodeClicked.numOfBeans.getValue() - 1); // decrease value of selected node
+                    currentNode.numOfBeans.setValue(
+                            currentNode.numOfBeans.getValue() + 1); // increase value of next nodes
                 }
-                else {
-                    statusMessage.setText("It's " + player1.getUserName() + " Playing ");
-                    break;
-                }
-                nextPlayersTurn(node);
             }
             else if (player2.getMyTurn()) {
-                    if (nodeClicked.ID > 7 && nodeClicked.ID < 14) {
-                        if (node.nextNode.ID == 7) {
-                            tempNode.numOfBeans.set(tempNode.numOfBeans.getValue() - 1);
-                            node.nextNode.nextNode.numOfBeans.setValue(node.nextNode.nextNode.numOfBeans.getValue() + 1);
-                            moveStonesRecursion(node.nextNode.nextNode);
-                        }
-                        else {
-                            tempNode.numOfBeans.set(tempNode.numOfBeans.getValue() - 1);
-                            node.nextNode.numOfBeans.setValue(node.nextNode.numOfBeans.getValue() + 1);
-                            moveStonesRecursion(node.nextNode);
-                        }
+                if (nodeClicked.ID > 7 && nodeClicked.ID < 14) {// if node clicked is player 2's nodes
+                    System.out.println("2");
+                    if (currentNode.ID == 7) { // if node is mancala of opposite player
+                        currentNode = currentNode.nextNode; // go to next
                     }
+                    nodeClicked.numOfBeans.set(nodeClicked.numOfBeans.getValue() - 1);// decrease value of selected node
+                    currentNode.numOfBeans.setValue(
+                            currentNode.numOfBeans.getValue() + 1);// increase value of next nodes
                 }
-                else{
+            }
+        }));
+        timeline.play();
+        timeline.setOnFinished(e -> {
+            evaluateWhoPlay();
+            endGame(didGameEnd());
+        });
+    }
 
-                    statusMessage.setText("It's " + player2.getUserName() + " Playing ");
-                    break;
-                }
-            nextPlayersTurn(node);
+    /**
+     * evaluates what player should play next
+     */
+    private void evaluateWhoPlay() {
+        if (player1.getMyTurn()) {
+            if (currentNode.ID != 7) { //if last stone not placed in current players mancala
+                statusMessage.setText("It's " + player2.getUserName() + "'s turn ");
+                player1.setMyTurn(false);
+                player2.setMyTurn(true);
+                enableCups(); // disable and enables cups depending on who's turn it is
+            }
+            else {
+                statusMessage.setText("Good Job " + player1.getUserName() + " - go again!");
             }
         }
+        else if (player2.getMyTurn()) {
+            if (currentNode.ID != 14) { //if last stone not placed in current players mancala
+                statusMessage.setText("It's " + player1.getUserName() + "'s turn ");
+                player1.setMyTurn(true);
+                player2.setMyTurn(false);
+                enableCups(); // disable and enables cups depending on who's turn it is
+            }
+            else {
+                statusMessage.setText("Good Job " + player2.getUserName() + " - go again!");
+            }
+        }
+    }
 
-    public void didGameEnd() {
+    /**
+     * disable and enables cups depending on who's turn it is
+     */
+    private void enableCups() {
+        if (player1.getMyTurn()) { // if player 1, disable player 2 and enable its own
+            imageViewArrayList.get(0).setDisable(false);
+            imageViewArrayList.get(1).setDisable(false);
+            imageViewArrayList.get(2).setDisable(false);
+            imageViewArrayList.get(3).setDisable(false);
+            imageViewArrayList.get(4).setDisable(false);
+            imageViewArrayList.get(5).setDisable(false);
+            imageViewArrayList.get(7).setDisable(true);
+            imageViewArrayList.get(8).setDisable(true);
+            imageViewArrayList.get(9).setDisable(true);
+            imageViewArrayList.get(10).setDisable(true);
+            imageViewArrayList.get(11).setDisable(true);
+            imageViewArrayList.get(12).setDisable(true);
+        }
+        else if (player2.getMyTurn()) { // if player 2, disable player 1 and enable its own
+            imageViewArrayList.get(0).setDisable(true);
+            imageViewArrayList.get(1).setDisable(true);
+            imageViewArrayList.get(2).setDisable(true);
+            imageViewArrayList.get(3).setDisable(true);
+            imageViewArrayList.get(4).setDisable(true);
+            imageViewArrayList.get(5).setDisable(true);
+            imageViewArrayList.get(7).setDisable(false);
+            imageViewArrayList.get(8).setDisable(false);
+            imageViewArrayList.get(9).setDisable(false);
+            imageViewArrayList.get(10).setDisable(false);
+            imageViewArrayList.get(11).setDisable(false);
+            imageViewArrayList.get(12).setDisable(false);
+        }
+    }
 
+    /**
+     * check if game is ended
+     *
+     * @return - returns true if game has ended, else false
+     */
+    private boolean didGameEnd() {
         if (nodeArrayList.get(0).numOfBeans.intValue() == 0 && nodeArrayList.get(
                 1).numOfBeans.intValue() == 0 && nodeArrayList.get(
                 2).numOfBeans.intValue() == 0 && nodeArrayList.get(
                 3).numOfBeans.intValue() == 0 && nodeArrayList.get(
                 4).numOfBeans.intValue() == 0 && nodeArrayList.get(
                 5).numOfBeans.intValue() == 0) {
-            endGameScreen();
+            return true;
         }
         else if (nodeArrayList.get(7).numOfBeans.intValue() == 0 && nodeArrayList.get(
                 8).numOfBeans.intValue() == 0 && nodeArrayList.get(
@@ -305,46 +384,55 @@ public class CircularLinkedList {
                 10).numOfBeans.intValue() == 0 && nodeArrayList.get(
                 11).numOfBeans.intValue() == 0 && nodeArrayList.get(
                 12).numOfBeans.intValue() == 0) {
-            endGameScreen();
-        }
-
-
-    }
-
-    private void endGameScreen() {
-        movetoMancala();
-        if (nodeArrayList.get(6).numOfBeans.intValue() < nodeArrayList.get(13).numOfBeans.intValue()) {
-            statusMessage.setText(player2.getUserName() + " has Won");
+            return true;
         }
         else {
-            statusMessage.setText(player1.getUserName() + " has Won");
+            return false;
         }
-        rematchButton.setVisible(true);
-        newGameButton.setVisible(true);
     }
 
-    public void movetoMancala() {
-        for (Node node : nodeArrayList) {
-            if (node.ID >= 0 && node.ID < 7) {
-                nodeArrayList.get(6).numOfBeans.setValue(
-                        nodeArrayList.get(6).numOfBeans.intValue() + node.numOfBeans.intValue());
-                node.numOfBeans.setValue(0);
+    /**
+     * this executes the game play ending, set status message to who win and let them play again
+     *
+     * @param didGameEnd - should know if game is ended or not to execute its content
+     */
+    private void endGame(Boolean didGameEnd) {
+        if (didGameEnd) {
+            for (Node node : nodeArrayList) {
+                if (node.ID >= 0 && node.ID < 7) {
+                    nodeArrayList.get(6).numOfBeans.setValue(
+                            nodeArrayList.get(6).numOfBeans.intValue() + node.numOfBeans.intValue());
+                    node.numOfBeans.setValue(0);
+                }
+                else if (node.ID > 7 && node.ID < 14) {
+                    nodeArrayList.get(13).numOfBeans.setValue(
+                            nodeArrayList.get(13).numOfBeans.intValue() + node.numOfBeans.intValue());
+                    node.numOfBeans.setValue(0);
+                }
             }
-            else if (node.ID > 7 && node.ID < 14) {
-                nodeArrayList.get(13).numOfBeans.setValue(
-                        nodeArrayList.get(13).numOfBeans.intValue() + node.numOfBeans.intValue());
-                node.numOfBeans.setValue(0);
+            if (nodeArrayList.get(6).numOfBeans.intValue() < nodeArrayList.get(13).numOfBeans.intValue()) {
+                statusMessage.setText(player2.getUserName() + " has Won");
             }
+            else {
+                statusMessage.setText(player1.getUserName() + " has Won");
+            }
+            rematchButton.setVisible(true);
+            newGameButton.setVisible(true);
         }
-
     }
 
-    public void showMenu() {
+    /**
+     * if new game is clicked after an ended game, this is invoked
+     */
+    public void showNewGameMenu() {
         newGameButton.setVisible(false);
         rematchButton.setVisible(false);
         menuPane.setVisible(true);
     }
 
+    /**
+     * if you enter usernames (or not dont have to) you start a match with this method
+     */
     public void startMatch() {
         for (Node node : nodeArrayList) {
             if (nodeArrayList.indexOf(node) == 6 || nodeArrayList.indexOf(node) == 13) {
@@ -354,82 +442,17 @@ public class CircularLinkedList {
                 node.numOfBeans.setValue(6);
             }
         }
-        generateNewPlayers();
+        initializePlayers();
         menuPane.setVisible(false);
         statusMessage.setText(null);
         newGameButton.setVisible(false);
         rematchButton.setVisible(false);
     }
 
-
-    public void generateNewPlayers() {
-        player1 = new Player(true, player1_NameField.getText());
-        player2 = new Player(false, player2_NameField.getText());
-    }
-
-    public void generateNewCups() {
-        Node node1 = new Node(4, 1);
-        Node node2 = new Node(4, 2);
-        Node node3 = new Node(4, 3);
-        Node node4 = new Node(4, 4);
-        Node node5 = new Node(4, 5);
-        Node node6 = new Node(4, 6);
-        Node node7 = new Node(0, 7);
-        Node node8 = new Node(4, 8);
-        Node node9 = new Node(4, 9);
-        Node node10 = new Node(4, 10);
-        Node node11 = new Node(4, 11);
-        Node node12 = new Node(4, 12);
-        Node node13 = new Node(4, 13);
-        Node node14 = new Node(0, 14);
-        ArrayList<Node> nodes = new ArrayList<Node>() {{
-            add(node1);
-            add(node2);
-            add(node3);
-            add(node4);
-            add(node5);
-            add(node6);
-            add(node7);
-            add(node8);
-            add(node9);
-            add(node10);
-            add(node11);
-            add(node12);
-            add(node13);
-            add(node14);
-        }};
-        nodeArrayList = nodes;
-    }
-
-    public void addCupsAsNodes() {
-        for (Node node : nodeArrayList) {
-            if (head == null) {
-                head = node;
-            }
-            else {
-                tail.nextNode = node;
-            }
-
-            tail = node;
-            tail.nextNode = head;
-        }
-    }
-
-    public void resetImageViews() {
-        for (ImageView imageView : imageViewArrayList) {
-            if (imageView.equals(player1_ImageView7)) {
-                imageView.setImage(mancalaImage_1);
-            }
-            else if (imageView.equals(player2_ImageView7)) {
-                imageView.setImage(mancalaImage_2);
-            }
-            else {
-                imageView.imageProperty().setValue(startCup);
-            }
-        }
-    }
-
-    public void bindCupsToProperties() {
+    /**
+     * adds listener and bindings too the nodes, so textfields, images, etc. update upon new score in a node
+     */
+    private void bindNodesToProperties() {
         for (Node node : nodeArrayList) {
             switch (node.ID) {
                 case 1: {

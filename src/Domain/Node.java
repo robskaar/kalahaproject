@@ -10,6 +10,10 @@ import javafx.beans.property.SimpleIntegerProperty;
  * @Date 26-03-2020
  **/
 
+
+/**
+ * this is a node in the circular linked list / a cup in the game
+ */
 public class Node {
 
      public final int ID;
